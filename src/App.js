@@ -1,24 +1,20 @@
-import logo from './logo.svg';
-import './App.css';
+import { Container } from "@mui/material";
+import TodoList from "./components/TodoList";
+import { TodosProvider } from "./contexts/TodosContext";
+import { AlertDialogProvider } from "./contexts/AlertDialogContext";
+import { CustomizedSnackbarsProvider } from "./contexts/CustomizedSnackbarsContext";
 
 function App() {
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
+    <Container maxWidth="sm" sx={{ height: "100vh" }}>
+      <CustomizedSnackbarsProvider>
+        <TodosProvider>
+          <AlertDialogProvider>
+            <TodoList />
+          </AlertDialogProvider>
+        </TodosProvider>
+      </CustomizedSnackbarsProvider>
+    </Container>
   );
 }
 
