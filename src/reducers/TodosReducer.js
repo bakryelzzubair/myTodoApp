@@ -2,8 +2,8 @@ import { v4 as uuidv4 } from "uuid";
 
 const TodosReducer = (currentStat, action) => {
   switch (action.type) {
-    case "getItemsFromLocalStorage":
-      return JSON.parse(localStorage.getItem("todos")) ?? [];
+    case "get":
+      return action.payload.setTodosList;
     case "create":
       const newTodosLis = [
         ...currentStat,
@@ -21,17 +21,17 @@ const TodosReducer = (currentStat, action) => {
         return todo;
       });
       return newTodosList;
-    case "edit":             
-    const currentStatE = [...currentStat];
-      const newEditedTodosList = currentStatE.map((todo)=> {
-        if(todo.id === action.payload.id){  
-            const newEditedTodo = {...todo, title: action.payload.title}
-            return newEditedTodo
+    case "edit":
+      const currentStatE = [...currentStat];
+      const newEditedTodosList = currentStatE.map((todo) => {
+        if (todo.id === action.payload.id) {
+          const newEditedTodo = { ...todo, title: action.payload.title };
+          return newEditedTodo;
         }
-        return todo
-      })
+        return todo;
+      });
       localStorage.setItem("todos", JSON.stringify(newEditedTodosList));
-    return newEditedTodosList;
+      return newEditedTodosList;
     default:
       throw Error("Unknown action", action.type);
   }

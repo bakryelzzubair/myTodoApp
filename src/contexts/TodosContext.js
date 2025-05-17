@@ -4,6 +4,7 @@ import {
   useReducer,
   useMemo,
   useState,
+  useEffect,
 } from "react";
 import TodosReducer from "../reducers/TodosReducer";
 
@@ -34,6 +35,10 @@ export const TodosProvider = ({ children }) => {
       filterdTodos = TodosList;
       break;
   }
+  useEffect(() => {
+    const setTodosList = JSON.parse(localStorage.getItem("todos")) ?? [];
+    dispatch({type: "get", payload: {setTodosList}})
+  }, []);
 
   return (
     <TodosContext.Provider

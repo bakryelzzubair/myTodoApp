@@ -13,13 +13,12 @@ import { useCustomizedSnackbars } from "../contexts/CustomizedSnackbarsContext";
 
 const TodoList = () => {
 
-  useEffect(()=>{dispatch({ type: "getItemsFromLocalStorage" });},[])
-
+  
   // const {setOpenCreateDialog} = useAlertDialog()
   const [inputValue, setInputValue] = useState("");
   const {filterdTodos,dispatch } = useTodos();
   const { setOpen, setSnackBarMsg } =
-    useCustomizedSnackbars();
+  useCustomizedSnackbars();
 
   //handlers
   const handleCreateButton = () => {    
